@@ -1,18 +1,12 @@
 # rigel-gateway
-API gateway for routing, authentication forwarding, rate limiting, and service entrypoint management.
 
-**Language:** `Java`
-**Stack:** `Spring Cloud Gateway, Redis, rate limiting, JWT validation or auth forwarding.`
+Public API gateway for Orion Platform V1.
 
-**Features:**
-```
-Route /auth/** -> bellatrix-auth
-Route /core/** -> betelgeuse-core
-Route /events/** -> alnitak-events if needed
-Request correlation id
-Rate limiting
-CORS
-Centralized error response
-Forward user headers
-Swagger aggregation optional
-```
+## Routes
+
+- `/auth/**` -> `bellatrix-auth`
+- `/core/**` -> `betelgeuse-core` with the `/core` prefix stripped
+
+The gateway adds `X-Correlation-Id`, applies basic Redis-backed rate limiting,
+and forwards authenticated user headers when `/auth/me` validates a bearer
+token.
